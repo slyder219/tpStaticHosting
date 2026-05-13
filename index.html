@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="TruePeak homepage">
+	<title>TruePeak</title>
+	<link rel="icon" href="tp_circle.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #ece8de;
+			--panel: rgba(255, 255, 255, 0.52);
+			--panel-strong: rgba(255, 255, 255, 0.7);
+			--text: #102531;
+			--muted: #5f7280;
+			--line: rgba(16, 37, 49, 0.12);
+			--ink: #102531;
+			--ink-soft: #31506a;
+			--accent: #5b7f93;
+			--accent-2: #7791a3;
+			--shadow: 0 24px 80px rgba(16, 37, 49, 0.14);
+			--radius-xl: 30px;
+			--radius-lg: 22px;
+			--radius-md: 16px;
+			--max: 1180px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			margin: 0;
+			color: var(--text);
+			font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			background:
+				radial-gradient(circle at top left, rgba(91, 127, 147, 0.14), transparent 26%),
+				radial-gradient(circle at 85% 18%, rgba(16, 37, 49, 0.1), transparent 18%),
+				linear-gradient(180deg, #f2eee5 0%, #e9e3d9 100%);
+			min-height: 100vh;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			background-image: linear-gradient(rgba(16, 37, 49, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 37, 49, 0.03) 1px, transparent 1px);
+			background-size: 72px 72px;
+			mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.34), transparent 70%);
+			opacity: 0.45;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+		}
+
+		.shell {
+			width: min(calc(100% - 32px), var(--max));
+			margin: 0 auto;
+			position: relative;
+			z-index: 1;
+		}
+
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			padding: 18px 0 0;
+			backdrop-filter: blur(18px);
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			padding: 14px 18px;
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.4);
+			box-shadow: var(--shadow);
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			min-width: 0;
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: 0.98rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.brand img {
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+			box-shadow: 0 10px 24px rgba(16, 37, 49, 0.16);
+		}
+
+		.brand span {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.nav-links {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.nav-links a {
+			padding: 10px 16px;
+			border-radius: 999px;
+			color: var(--muted);
+			font-size: 0.96rem;
+			font-weight: 600;
+			transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+		}
+
+		.nav-links a:hover,
+		.nav-links a:focus-visible {
+			color: var(--ink);
+			background: rgba(16, 37, 49, 0.06);
+			outline: none;
+		}
+
+		.nav-toggle {
+			display: none;
+			align-items: center;
+			justify-content: center;
+			width: 44px;
+			height: 44px;
+			border: 1px solid var(--line);
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.55);
+			color: var(--ink);
+			cursor: pointer;
+		}
+
+		.hero {
+			padding: 72px 0 28px;
+		}
+
+		.hero-grid {
+			display: grid;
+			grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+			gap: 24px;
+			align-items: stretch;
+		}
+
+		.hero-copy,
+		.hero-visual,
+		.panel {
+			border: 1px solid var(--line);
+			background: var(--panel);
+			backdrop-filter: blur(18px);
+			box-shadow: var(--shadow);
+			border-radius: var(--radius-xl);
+		}
+
+		.hero-copy {
+			padding: clamp(30px, 4vw, 56px);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			min-height: 620px;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--accent);
+			font-size: 0.8rem;
+			font-weight: 800;
+			letter-spacing: 0.22em;
+			text-transform: uppercase;
+		}
+
+		.eyebrow::before {
+			content: "";
+			width: 34px;
+			height: 1px;
+			background: currentColor;
+			opacity: 0.65;
+		}
+
+		h1,
+		h2,
+		h3,
+		p {
+			margin: 0;
+		}
+
+		h1 {
+			margin-top: 18px;
+			max-width: 9ch;
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: clamp(3.2rem, 8vw, 6.8rem);
+			line-height: 0.92;
+			letter-spacing: -0.06em;
+			text-wrap: balance;
+		}
+
+		.lede {
+			max-width: 38rem;
+			margin-top: 20px;
+			color: var(--muted);
+			font-size: clamp(1rem, 1.5vw, 1.12rem);
+			line-height: 1.8;
+		}
+
+		.hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 34px;
+		}
+
+		.button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			min-height: 48px;
+			padding: 0 20px;
+			border-radius: 999px;
+			border: 1px solid transparent;
+			font-weight: 700;
+			transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+		}
+
+		.button:hover,
+		.button:focus-visible {
+			transform: translateY(-1px);
+			outline: none;
+		}
+
+		.button.primary {
+			background: var(--ink);
+			color: #f5f0e8;
+			box-shadow: 0 18px 32px rgba(16, 37, 49, 0.22);
+		}
+
+		.button.secondary {
+			border-color: rgba(16, 37, 49, 0.14);
+			background: rgba(255, 255, 255, 0.42);
+			color: var(--ink);
+		}
+
+		.stats {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 12px;
+			margin-top: 42px;
+		}
+
+		.stat {
+			padding: 18px 16px;
+			border-radius: var(--radius-md);
+			border: 1px solid rgba(16, 37, 49, 0.08);
+			background: rgba(255, 255, 255, 0.5);
+		}
+
+		.stat strong {
+			display: block;
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: 1.18rem;
+			line-height: 1.1;
+		}
+
+		.stat span {
+			display: block;
+			margin-top: 8px;
+			color: var(--muted);
+			font-size: 0.92rem;
+			line-height: 1.5;
+		}
+
+		.hero-visual {
+			padding: 18px;
+			display: grid;
+			grid-template-rows: minmax(0, 1fr) auto;
+			gap: 18px;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.art-panel {
+			position: relative;
+			min-height: 420px;
+			border-radius: calc(var(--radius-xl) - 8px);
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.15)),
+				radial-gradient(circle at 35% 20%, rgba(91, 127, 147, 0.2), transparent 32%),
+				radial-gradient(circle at 80% 60%, rgba(16, 37, 49, 0.12), transparent 24%),
+				#e8e2d8;
+			overflow: hidden;
+		}
+
+		.art-panel img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.floating-badge {
+			position: absolute;
+			left: 18px;
+			bottom: 18px;
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 14px;
+			border-radius: 999px;
+			background: rgba(16, 37, 49, 0.74);
+			color: #f4efe7;
+			font-size: 0.92rem;
+			font-weight: 600;
+			letter-spacing: 0.02em;
+			backdrop-filter: blur(12px);
+		}
+
+		.floating-badge i {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: #86a1b2;
+			box-shadow: 0 0 0 6px rgba(134, 161, 178, 0.18);
+			display: inline-block;
+		}
+
+		.swatch-row {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 10px;
+		}
+
+		.swatch {
+			min-height: 76px;
+			border-radius: 18px;
+			border: 1px solid rgba(16, 37, 49, 0.08);
+			overflow: hidden;
+			display: flex;
+			align-items: end;
+			padding: 10px;
+			color: rgba(255, 255, 255, 0.92);
+			font-size: 0.8rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.swatch:nth-child(1) { background: #102531; }
+		.swatch:nth-child(2) { background: #31506a; }
+		.swatch:nth-child(3) { background: #5b7f93; }
+		.swatch:nth-child(4) { background: #e8e2d8; color: var(--ink); }
+
+		.section {
+			padding: 22px 0 0;
+		}
+
+		.section-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.card {
+			padding: 24px;
+			border-radius: var(--radius-lg);
+			border: 1px solid rgba(16, 37, 49, 0.1);
+			background: var(--panel-strong);
+			box-shadow: 0 12px 40px rgba(16, 37, 49, 0.08);
+		}
+
+		.card h3 {
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: 1.16rem;
+			line-height: 1.2;
+			letter-spacing: -0.03em;
+		}
+
+		.card p {
+			margin-top: 10px;
+			color: var(--muted);
+			line-height: 1.8;
+			font-size: 0.96rem;
+		}
+
+		.meta {
+			margin-top: 18px;
+			color: var(--accent);
+			font-size: 0.78rem;
+			font-weight: 800;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+		}
+
+		.contact {
+			margin: 22px 0 52px;
+			padding: 26px;
+			border-radius: var(--radius-xl);
+			border: 1px solid rgba(16, 37, 49, 0.12);
+			background:
+				linear-gradient(135deg, rgba(16, 37, 49, 0.92), rgba(49, 80, 106, 0.84)),
+				var(--ink);
+			color: #f4efe7;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			box-shadow: var(--shadow);
+		}
+
+		.contact h2 {
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: clamp(1.7rem, 4vw, 2.5rem);
+			line-height: 1.05;
+			letter-spacing: -0.04em;
+		}
+
+		.contact p {
+			margin-top: 10px;
+			max-width: 58ch;
+			color: rgba(244, 239, 231, 0.78);
+			line-height: 1.7;
+		}
+
+		.contact .button.secondary {
+			background: rgba(255, 255, 255, 0.08);
+			border-color: rgba(255, 255, 255, 0.18);
+			color: #f4efe7;
+		}
+
+		footer {
+			padding: 0 0 30px;
+			color: rgba(16, 37, 49, 0.62);
+			font-size: 0.92rem;
+		}
+
+		.footer-row {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding-top: 18px;
+			border-top: 1px solid rgba(16, 37, 49, 0.1);
+		}
+
+		.footer-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 16px;
+		}
+
+		.footer-links a:hover,
+		.footer-links a:focus-visible {
+			color: var(--ink);
+			outline: none;
+		}
+
+		.reveal {
+			animation: floatUp 700ms ease both;
+		}
+
+		.delay-1 { animation-delay: 90ms; }
+		.delay-2 { animation-delay: 180ms; }
+		.delay-3 { animation-delay: 270ms; }
+
+		@keyframes floatUp {
+			from {
+				opacity: 0;
+				transform: translateY(18px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 960px) {
+			.hero-grid,
+			.section-grid,
+			.contact {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-copy {
+				min-height: unset;
+			}
+
+			.contact {
+				display: grid;
+			}
+		}
+
+		@media (max-width: 760px) {
+			.site-header {
+				padding-top: 12px;
+			}
+
+			.nav {
+				border-radius: 24px;
+				padding: 12px;
+				align-items: flex-start;
+				flex-wrap: wrap;
+			}
+
+			.nav-toggle {
+				display: inline-flex;
+			}
+
+			.nav-links {
+				display: none;
+				width: 100%;
+				padding-top: 8px;
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			.nav-links[data-open="true"] {
+				display: flex;
+			}
+
+			.nav-links a {
+				width: 100%;
+			}
+
+			.hero {
+				padding-top: 34px;
+			}
+
+			.hero-copy,
+			.hero-visual,
+			.panel,
+			.contact {
+				border-radius: 24px;
+			}
+
+			h1 {
+				max-width: 100%;
+			}
+
+			.stats,
+			.swatch-row {
+				grid-template-columns: 1fr;
+			}
+
+			.floating-badge {
+				right: 18px;
+				left: 18px;
+				justify-content: center;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html {
+				scroll-behavior: auto;
+			}
+
+			*,
+			*::before,
+			*::after {
+				animation-duration: 0.01ms !important;
+				animation-iteration-count: 1 !important;
+				transition-duration: 0.01ms !important;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<div class="shell">
+			<nav class="nav" aria-label="Primary">
+				<a class="brand" href="#home">
+					<img src="tp_circle.png" alt="TruePeak logo">
+					<span>TruePeak</span>
+				</a>
+
+				<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+					<span class="sr-only">Menu</span>
+					☰
+				</button>
+
+				<div class="nav-links" id="primary-nav" data-open="true">
+					<a href="#home">Home</a>
+					<a href="#about">About</a>
+					<a href="#contact">Contact</a>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero" id="home">
+			<div class="shell">
+				<div class="hero-grid">
+					<div class="hero-copy reveal">
+						<div>
+							<div class="eyebrow">TruePeak</div>
+							  <h1>Welcome to TruePeak.</h1>
+							  <p class="lede">Standard company boilerplate goes here. Short, simple, and easy to scan.</p>
+							<div class="hero-actions">
+								<a class="button primary" href="#about">About</a>
+								<a class="button secondary" href="#contact">Contact</a>
+							</div>
+						</div>
+
+						<div class="stats" aria-label="Highlights">
+							<div class="stat delay-1">
+								<strong>Home</strong>
+								<span>Welcome text.</span>
+							</div>
+							<div class="stat delay-2">
+								<strong>About</strong>
+								<span>Standard overview.</span>
+							</div>
+							<div class="stat delay-3">
+								<strong>Contact</strong>
+								<span>Basic contact path.</span>
+							</div>
+						</div>
+					</div>
+
+					<aside class="hero-visual reveal delay-1" aria-label="Brand visual">
+						<div class="art-panel">
+							<img src="tp_wide.JPEG" alt="TruePeak logo variation">
+							<div class="floating-badge"><i></i> Built for a clean first impression</div>
+						</div>
+						<div class="swatch-row" aria-hidden="true">
+							<div class="swatch">Ink</div>
+							<div class="swatch">Slate</div>
+							<div class="swatch">Steel</div>
+							<div class="swatch">Ivory</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="about">
+			<div class="shell">
+				<div class="section-grid">
+					<article class="card reveal">
+						<div class="meta">About</div>
+						<h3>Welcome text and standard structure.</h3>
+						<p>This section is here to say a little without saying much. It keeps the page tidy and familiar.</p>
+					</article>
+
+					<article class="card reveal delay-1">
+						<div class="meta">Consulting</div>
+						<h3>Boilerplate that stays out of the way.</h3>
+						<p>Short blocks of copy, clean spacing, and a straightforward layout keep everything easy to skim.</p>
+					</article>
+
+					<article class="card reveal delay-2">
+						<div class="meta">Development</div>
+						<h3>Simple setup, standard pages.</h3>
+						<p>The page can stay as-is or grow later without changing the basic structure you see here.</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="contact">
+			<div class="shell">
+				<div class="contact reveal">
+					<div>
+						<h2>Contact</h2>
+						<p>Use this area for a simple email link, a form, or any standard contact path you want to add later.</p>
+					</div>
+					<a class="button secondary" href="mailto:hello@truepeak.com">hello@truepeak.com</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="shell">
+			<div class="footer-row">
+				<div>TruePeak</div>
+				<div class="footer-links">
+					<a href="#home">Home</a>
+					<a href="#about">About</a>
+					<a href="#contact">Contact</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		const toggle = document.querySelector('.nav-toggle');
+		const navLinks = document.querySelector('#primary-nav');
+
+		if (toggle && navLinks) {
+			const sync = (open) => {
+				navLinks.dataset.open = String(open);
+				toggle.setAttribute('aria-expanded', String(open));
+			};
+
+			sync(window.matchMedia('(min-width: 761px)').matches);
+
+			toggle.addEventListener('click', () => {
+				const open = navLinks.dataset.open !== 'true';
+				sync(open);
+			});
+
+			navLinks.addEventListener('click', (event) => {
+				if (event.target instanceof HTMLAnchorElement && window.matchMedia('(max-width: 760px)').matches) {
+					sync(false);
+				}
+			});
+
+			window.matchMedia('(min-width: 761px)').addEventListener('change', (event) => {
+				sync(event.matches);
+			});
+		}
+	</script>
+</body>
+</html>
