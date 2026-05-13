@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TruePeak Assets</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #ece8de;
+			--panel: rgba(255, 255, 255, 0.6);
+			--text: #102531;
+			--muted: #5f7280;
+			--line: rgba(16, 37, 49, 0.12);
+			--accent: #31506a;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			font-family: Inter, system-ui, sans-serif;
+			color: var(--text);
+			background:
+				radial-gradient(circle at top left, rgba(91, 127, 147, 0.14), transparent 30%),
+				linear-gradient(180deg, #f2eee5 0%, #e9e3d9 100%);
+			display: grid;
+			place-items: center;
+			padding: 24px;
+		}
+
+		main {
+			width: min(680px, 100%);
+			background: var(--panel);
+			border: 1px solid var(--line);
+			border-radius: 20px;
+			padding: 22px;
+			backdrop-filter: blur(12px);
+		}
+
+		h1 {
+			margin: 0 0 6px;
+			font: 600 1.2rem "Space Grotesk", Inter, sans-serif;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+		}
+
+		p {
+			margin: 0 0 14px;
+			color: var(--muted);
+			font-size: 0.95rem;
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			gap: 8px;
+		}
+
+		a {
+			display: block;
+			padding: 10px 12px;
+			border-radius: 10px;
+			border: 1px solid var(--line);
+			text-decoration: none;
+			color: var(--accent);
+			background: rgba(255, 255, 255, 0.55);
+			font-weight: 600;
+		}
+
+		a:hover,
+		a:focus-visible {
+			outline: none;
+			background: rgba(255, 255, 255, 0.9);
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>Assets</h1>
+		<p>Static files available at <strong>/assets</strong></p>
+		<ul id="asset-list"></ul>
+	</main>
+
+	<script>
+		const assets = ["tp_circle.png", "tp_square.JPEG", "tp_wide.JPEG"];
+		const list = document.getElementById("asset-list");
+
+		for (const file of assets) {
+			const item = document.createElement("li");
+			const link = document.createElement("a");
+			link.href = `./${file}`;
+			link.target = "_blank";
+			link.rel = "noopener";
+			link.textContent = file;
+			item.append(link);
+			list.append(item);
+		}
+	</script>
+</body>
+</html>
