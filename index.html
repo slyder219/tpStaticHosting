@@ -312,7 +312,7 @@
 		.hero-visual {
 			padding: 18px;
 			display: grid;
-			grid-template-rows: minmax(0, 1fr) auto;
+			grid-template-rows: minmax(420px, 1fr) auto;
 			gap: 18px;
 			overflow: hidden;
 			position: relative;
@@ -336,57 +336,55 @@
 			object-fit: cover;
 		}
 
-		.floating-badge {
-			position: absolute;
-			left: 18px;
-			bottom: 18px;
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			padding: 12px 14px;
-			border-radius: 999px;
-			background: rgba(16, 37, 49, 0.74);
-			color: #f4efe7;
-			font-size: 0.92rem;
-			font-weight: 600;
-			letter-spacing: 0.02em;
-			backdrop-filter: blur(12px);
-		}
-
-		.floating-badge i {
-			width: 10px;
-			height: 10px;
-			border-radius: 50%;
-			background: #86a1b2;
-			box-shadow: 0 0 0 6px rgba(134, 161, 178, 0.18);
-			display: inline-block;
-		}
-
-		.swatch-row {
-			display: grid;
-			grid-template-columns: repeat(4, minmax(0, 1fr));
-			gap: 10px;
-		}
-
-		.swatch {
-			min-height: 76px;
-			border-radius: 18px;
-			border: 1px solid rgba(16, 37, 49, 0.08);
-			overflow: hidden;
+		.brand-panel {
 			display: flex;
-			align-items: end;
-			padding: 10px;
-			color: rgba(255, 255, 255, 0.92);
-			font-size: 0.8rem;
-			font-weight: 700;
-			letter-spacing: 0.12em;
-			text-transform: uppercase;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 18px 20px;
+			border-radius: calc(var(--radius-xl) - 8px);
+			border: 1px solid rgba(16, 37, 49, 0.08);
+			background: rgba(255, 255, 255, 0.48);
 		}
 
-		.swatch:nth-child(1) { background: #102531; }
-		.swatch:nth-child(2) { background: #31506a; }
-		.swatch:nth-child(3) { background: #5b7f93; }
-		.swatch:nth-child(4) { background: #e8e2d8; color: var(--ink); }
+		.brand-mark {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			min-width: 0;
+		}
+
+		.brand-mark img {
+			width: 54px;
+			height: 54px;
+			flex: 0 0 auto;
+			border-radius: 50%;
+			box-shadow: 0 12px 28px rgba(16, 37, 49, 0.14);
+		}
+
+		.brand-copy {
+			min-width: 0;
+		}
+
+		.brand-copy strong {
+			display: block;
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: 1rem;
+			letter-spacing: 0.02em;
+		}
+
+		.brand-copy span {
+			display: block;
+			margin-top: 4px;
+			color: var(--muted);
+			font-size: 0.92rem;
+			line-height: 1.5;
+		}
+
+		.brand-link {
+			white-space: nowrap;
+			flex: 0 0 auto;
+		}
 
 		.section {
 			padding: 22px 0 0;
@@ -457,6 +455,13 @@
 			max-width: 58ch;
 			color: rgba(244, 239, 231, 0.78);
 			line-height: 1.7;
+		}
+
+		.contact p a {
+			color: #f4efe7;
+			font-weight: 700;
+			text-decoration: underline;
+			text-underline-offset: 0.18em;
 		}
 
 		.contact .button.secondary {
@@ -632,8 +637,8 @@
 					<div class="hero-copy reveal">
 						<div>
 							<div class="eyebrow">TruePeak</div>
-							  <h1>Welcome to TruePeak.</h1>
-							  <p class="lede">Standard company boilerplate goes here. Short, simple, and easy to scan.</p>
+							<h1>Welcome to TruePeak.</h1>
+							<p class="lede">Consulting in business operations, custom systems development, and lightweight application work for teams that want practical tools and straightforward execution.</p>
 							<div class="hero-actions">
 								<a class="button primary" href="#about">About</a>
 								<a class="button secondary" href="#contact">Contact</a>
@@ -642,16 +647,16 @@
 
 						<div class="stats" aria-label="Highlights">
 							<div class="stat delay-1">
-								<strong>Home</strong>
-								<span>Welcome text.</span>
+								<strong>Operations</strong>
+								<span>Practical support for core business workflows.</span>
 							</div>
 							<div class="stat delay-2">
-								<strong>About</strong>
-								<span>Standard overview.</span>
+								<strong>Systems</strong>
+								<span>Custom development for internal tools and utilities.</span>
 							</div>
 							<div class="stat delay-3">
-								<strong>Contact</strong>
-								<span>Basic contact path.</span>
+								<strong>Delivery</strong>
+								<span>Lightweight builds with a clean process.</span>
 							</div>
 						</div>
 					</div>
@@ -659,13 +664,16 @@
 					<aside class="hero-visual reveal delay-1" aria-label="Brand visual">
 						<div class="art-panel">
 							<img src="tp_wide.JPEG" alt="TruePeak logo variation">
-							<div class="floating-badge"><i></i> Built for a clean first impression</div>
 						</div>
-						<div class="swatch-row" aria-hidden="true">
-							<div class="swatch">Ink</div>
-							<div class="swatch">Slate</div>
-							<div class="swatch">Steel</div>
-							<div class="swatch">Ivory</div>
+						<div class="brand-panel">
+							<div class="brand-mark">
+								<img src="tp_circle.png" alt="TruePeak logo">
+								<div class="brand-copy">
+									<strong>Consulting. Systems. Delivery.</strong>
+									<span>Focused support for practical operations and lightweight builds.</span>
+								</div>
+							</div>
+							<a class="button secondary brand-link" href="mailto:hello@truepeak.us">hello@truepeak.us</a>
 						</div>
 					</aside>
 				</div>
@@ -677,20 +685,20 @@
 				<div class="section-grid">
 					<article class="card reveal">
 						<div class="meta">About</div>
-						<h3>Welcome text and standard structure.</h3>
-						<p>This section is here to say a little without saying much. It keeps the page tidy and familiar.</p>
+						<h3>Business operations, made lighter.</h3>
+						<p>TruePeak focuses on practical consulting that helps teams keep work moving, reduce friction, and make everyday systems easier to use.</p>
 					</article>
 
 					<article class="card reveal delay-1">
 						<div class="meta">Consulting</div>
-						<h3>Boilerplate that stays out of the way.</h3>
-						<p>Short blocks of copy, clean spacing, and a straightforward layout keep everything easy to skim.</p>
+						<h3>Clear guidance with a direct path forward.</h3>
+						<p>Support can cover process review, operational cleanup, and the kind of practical direction that keeps decisions moving.</p>
 					</article>
 
 					<article class="card reveal delay-2">
 						<div class="meta">Development</div>
-						<h3>Simple setup, standard pages.</h3>
-						<p>The page can stay as-is or grow later without changing the basic structure you see here.</p>
+						<h3>Custom systems and lightweight applications.</h3>
+						<p>Builds stay focused and efficient, whether the need is an internal tool, a small web app, or a simple extension to an existing workflow.</p>
 					</article>
 				</div>
 			</div>
@@ -701,9 +709,9 @@
 				<div class="contact reveal">
 					<div>
 						<h2>Contact</h2>
-						<p>Use this area for a simple email link, a form, or any standard contact path you want to add later.</p>
+						<p><a href="mailto:hello@truepeak.us">hello@truepeak.us</a> is the quickest way to reach TruePeak about consulting, systems, or development work.</p>
 					</div>
-					<a class="button secondary" href="mailto:hello@truepeak.com">hello@truepeak.com</a>
+					<a class="button secondary" href="mailto:hello@truepeak.us">hello@truepeak.us</a>
 				</div>
 			</div>
 		</section>
