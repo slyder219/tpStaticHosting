@@ -206,7 +206,7 @@
 
 		.hero-grid {
 			display: grid;
-			grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+			grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
 			gap: 24px;
 			align-items: stretch;
 		}
@@ -369,79 +369,123 @@
 
 		.hero-visual {
 			padding: 18px;
-			display: grid;
-			grid-template-rows: minmax(420px, 1fr) auto;
+			display: flex;
+			flex-direction: column;
 			gap: 18px;
 			overflow: hidden;
 			position: relative;
 		}
 
-		.art-panel {
+		.focus-panel {
 			position: relative;
-			min-height: 420px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 22px;
+			min-height: 100%;
+			padding: 28px;
 			border-radius: calc(var(--radius-xl) - 8px);
+			border: 1px solid rgba(244, 239, 231, 0.1);
 			background:
-				linear-gradient(180deg, rgba(244, 239, 231, 0.08), rgba(244, 239, 231, 0.04)),
-				radial-gradient(circle at 35% 20%, rgba(244, 239, 231, 0.12), transparent 32%),
-				radial-gradient(circle at 80% 60%, rgba(119, 145, 163, 0.16), transparent 24%),
-				#102531;
+				radial-gradient(circle at top right, rgba(119, 145, 163, 0.26), transparent 30%),
+				linear-gradient(180deg, rgba(244, 239, 231, 0.08), rgba(16, 37, 49, 0.72));
 			overflow: hidden;
 		}
 
-		.art-panel img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-
-		.brand-panel {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 16px;
-			padding: 18px 20px;
-			border-radius: calc(var(--radius-xl) - 8px);
-			border: 1px solid rgba(244, 239, 231, 0.1);
-			background: rgba(16, 37, 49, 0.64);
-		}
-
-		.brand-mark {
-			display: flex;
-			align-items: center;
-			gap: 14px;
-			min-width: 0;
-		}
-
-		.brand-mark img {
-			width: 54px;
-			height: 54px;
-			flex: 0 0 auto;
+		.focus-panel::before {
+			content: "";
+			position: absolute;
+			inset: auto -10% -18% auto;
+			width: 230px;
+			height: 230px;
 			border-radius: 50%;
-			box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+			background: radial-gradient(circle, rgba(244, 239, 231, 0.15), transparent 68%);
+			pointer-events: none;
 		}
 
-		.brand-copy {
-			min-width: 0;
+		.focus-header {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			max-width: 30ch;
+			position: relative;
+			z-index: 1;
 		}
 
-		.brand-copy strong {
+		.focus-kicker {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--accent);
+			font-size: 0.78rem;
+			font-weight: 800;
+			letter-spacing: 0.22em;
+			text-transform: uppercase;
+		}
+
+		.focus-kicker::before {
+			content: "";
+			width: 34px;
+			height: 1px;
+			background: currentColor;
+			opacity: 0.65;
+		}
+
+		.focus-panel h2 {
+			font-family: "Space Grotesk", Inter, sans-serif;
+			font-size: clamp(1.7rem, 3vw, 2.6rem);
+			line-height: 1;
+			letter-spacing: -0.05em;
+		}
+
+		.focus-panel p {
+			color: var(--muted);
+			font-size: 0.98rem;
+			line-height: 1.8;
+		}
+
+		.focus-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+			position: relative;
+			z-index: 1;
+		}
+
+		.focus-item {
+			padding: 16px;
+			border-radius: var(--radius-md);
+			border: 1px solid rgba(244, 239, 231, 0.1);
+			background: rgba(16, 37, 49, 0.58);
+		}
+
+		.focus-item strong {
 			display: block;
 			font-family: "Space Grotesk", Inter, sans-serif;
 			font-size: 1rem;
-			letter-spacing: 0.02em;
+			letter-spacing: 0.01em;
 		}
 
-		.brand-copy span {
+		.focus-item span {
 			display: block;
-			margin-top: 4px;
+			margin-top: 8px;
 			color: var(--muted);
-			font-size: 0.92rem;
-			line-height: 1.5;
+			font-size: 0.9rem;
+			line-height: 1.55;
 		}
 
-		.brand-link {
+		.focus-cta {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 14px;
+			padding-top: 4px;
+			position: relative;
+			z-index: 1;
+		}
+
+		.focus-cta .button {
 			white-space: nowrap;
-			flex: 0 0 auto;
 		}
 
 		.section {
@@ -586,6 +630,10 @@
 				min-height: unset;
 			}
 
+			.focus-grid {
+				grid-template-columns: 1fr;
+			}
+
 			.contact {
 				display: grid;
 			}
@@ -628,7 +676,7 @@
 			}
 
 			.hero-visual {
-				display: none;
+				display: block;
 			}
 
 			.hero-copy,
@@ -725,18 +773,36 @@
 					</div>
 
 					<aside class="hero-visual reveal delay-1" aria-label="Brand visual">
-						<div class="art-panel">
-							<img src="./assets/tp_wide.JPEG" alt="TruePeak logo variation">
-						</div>
-						<div class="brand-panel">
-							<div class="brand-mark">
-								<img src="./assets/tp_circle.png" alt="TruePeak logo">
-								<div class="brand-copy">
-									<strong>Consulting. Systems. Delivery.</strong>
-									<span>Focused support for practical operations and lightweight builds.</span>
+						<div class="focus-panel">
+							<div class="focus-header">
+								<div class="focus-kicker">Practical support</div>
+								<h2>Consulting that clears the work, not just the inbox.</h2>
+								<p>TruePeak helps teams simplify operations, shape better internal systems, and move small digital projects forward without unnecessary process.</p>
+							</div>
+
+							<div class="focus-grid" aria-label="Service focus areas">
+								<div class="focus-item">
+									<strong>Operations</strong>
+									<span>Clean up the daily work that slows everything down.</span>
+								</div>
+								<div class="focus-item">
+									<strong>Systems</strong>
+									<span>Build simple tools that match how your team actually works.</span>
+								</div>
+								<div class="focus-item">
+									<strong>Delivery</strong>
+									<span>Keep the scope tight, the timeline clear, and the output useful.</span>
+								</div>
+								<div class="focus-item">
+									<strong>Contact</strong>
+									<span>hello@truepeak.us is the fastest way to start a conversation.</span>
 								</div>
 							</div>
-							<a class="button secondary brand-link" href="mailto:hello@truepeak.us">hello@truepeak.us</a>
+
+							<div class="focus-cta">
+								<a class="button secondary" href="mailto:hello@truepeak.us">hello@truepeak.us</a>
+								<span>Consulting, systems, and lightweight development.</span>
+							</div>
 						</div>
 					</aside>
 				</div>
