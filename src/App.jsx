@@ -12,7 +12,7 @@ const capabilities = [
 const work = [
   { title: 'Photography', domain: 'seanlyder.com', label: 'Personal photography', href: 'https://seanlyder.com' },
   { title: "Sophia's Lattes", domain: 'sophiaslattes.com', label: 'Independent hospitality', href: 'https://sophiaslattes.com' },
-  { title: 'TruePeak (This)', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us' },
+  { title: 'TruePeak US (This)', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us' },
   { title: 'Old Scripts Showcase', domain: 'showcase.seanlyder.com', label: 'Experiments and output', href: 'https://showcase.seanlyder.com' },
   { title: 'GitHub', domain: 'github.com/slyder219', label: 'Working code', href: 'https://github.com/slyder219' },
 ]
@@ -96,8 +96,8 @@ function App() {
     try {
       const data = new FormData(form)
       data.append('access_key', '915ab1ab-e025-4feb-86d9-aa9641f1608d')
-      data.append('subject', 'New TruePeak website inquiry')
-      data.append('from_name', 'TruePeak Website')
+      data.append('subject', 'New TruePeak US website inquiry')
+      data.append('from_name', 'TruePeak US Website')
       const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
       const result = await response.json()
       if (!response.ok || !result.success) throw new Error()
@@ -109,10 +109,10 @@ function App() {
 
   return <>
     <CustomCursor/>
-    <AnimatePresence>{intro && <motion.div className="intro" initial={{ y: 0 }} exit={{ y: '-100%' }} transition={{ duration: .75, ease: [0.76, 0, 0.24, 1] }}><motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .35 }}>TRUEPEAK</motion.span><div className="intro-line"><i/></div><small>MAKE THE NEXT MOVE CLEAR</small></motion.div>}</AnimatePresence>
+    <AnimatePresence>{intro && <motion.div className="intro" initial={{ y: 0 }} exit={{ y: '-100%' }} transition={{ duration: .75, ease: [0.76, 0, 0.24, 1] }}><motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .35 }}>TRUEPEAK <sup>US</sup></motion.span><div className="intro-line"><i/></div><small>MAKE THE NEXT MOVE CLEAR</small></motion.div>}</AnimatePresence>
 
     <header className="site-head">
-      <a className="wordmark" href="#top" onClick={closeMenu}><span>TRUE</span><span>PEAK</span></a>
+      <a className="wordmark" href="#top" onClick={closeMenu} aria-label="TruePeak US home"><span>TRUE</span><span>PEAK <b>US</b></span></a>
       <span className="head-note">Operations / Logistics / Systems</span>
       <div className="head-actions"><button className="head-contact" type="button" onClick={() => openInquiry('Project inquiry')}>Start a project <ArrowRight size={14}/></button><button className="menu-trigger" type="button" onClick={() => setMenuOpen(true)} aria-expanded={menuOpen}><span>Index</span><Menu size={20}/></button></div>
     </header>
@@ -125,7 +125,7 @@ function App() {
         <motion.div className="hero-stage" style={reducedMotion ? {} : { y: heroY, scale: heroScale }}>
           <p className="hero-kicker">Independent problem-solving practice<br/>Based in the United States</p>
           <h1><span>MOVE</span><em>what matters.</em></h1>
-          <div className="hero-support"><p>TruePeak turns operational friction into useful systems, dependable movement, and measurable momentum.</p><button onClick={() => openInquiry('Project inquiry')}>Bring us the problem <ArrowRight/></button></div>
+          <div className="hero-support"><p>TruePeak US turns operational friction into useful systems, dependable movement, and measurable momentum.</p><button onClick={() => openInquiry('Project inquiry')}>Bring us the problem <ArrowRight/></button></div>
           <div className="hero-axis" aria-hidden="true"><i/><span>N</span><b>↑</b><small>TRUE / 001</small></div>
           <a className="scroll-cue" href="#purpose"><span>Scroll to locate</span><ArrowDown size={15}/></a>
         </motion.div>
@@ -166,7 +166,7 @@ function App() {
         <div className="work-index">{work.map((item, index) => <a href={item.href} target="_blank" rel="noreferrer" key={item.href}><span className="work-num">0{index + 1}</span><strong>{item.title}</strong><small>{item.label}</small><em>{item.domain}</em><MoveUpRight/></a>)}</div>
       </section>
 
-      <section className="range" aria-label="TruePeak capabilities"><div className="range-line"><span>OPERATIONS</span><i>→</i><span>SYSTEMS</span><i>→</i><span>SOURCING</span><i>→</i><span>LOGISTICS</span><i>→</i><span>SOFTWARE</span></div></section>
+      <section className="range" aria-label="TruePeak US capabilities"><div className="range-line"><span>OPERATIONS</span><i>→</i><span>SYSTEMS</span><i>→</i><span>SOURCING</span><i>→</i><span>LOGISTICS</span><i>→</i><span>SOFTWARE</span></div></section>
 
       <section className="method" id="method">
         <header><span>04 / METHOD</span><h2>Four moves.<br/><i>No mystery.</i></h2></header>
@@ -178,9 +178,9 @@ function App() {
       </section>
     </main>
 
-    <footer><div className="footer-word">TRUEPEAK</div><div className="footer-bottom"><span>Practical strategy / purposeful systems</span><button onClick={() => openInquiry('Custom inquiry')}>hello@truepeak.us</button><a href="https://github.com/slyder219" target="_blank" rel="noreferrer">GitHub ↗</a><span>© {new Date().getFullYear()}</span></div></footer>
+    <footer><div className="footer-word"><span>TRUEPEAK</span><sup>US</sup></div><div className="footer-bottom"><span>Practical strategy / purposeful systems</span><button onClick={() => openInquiry('Custom inquiry')}>hello@truepeak.us</button><a href="https://github.com/slyder219" target="_blank" rel="noreferrer">GitHub ↗</a><span>© {new Date().getFullYear()} TruePeak LLC</span></div></footer>
 
-    <AnimatePresence>{inquiry.open && <motion.div className="inquiry-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => event.target === event.currentTarget && setInquiry((v) => ({ ...v, open: false }))}><motion.section className="inquiry-panel" initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ duration: .6, ease: [0.76, 0, 0.24, 1] }} role="dialog" aria-modal="true" aria-labelledby="inquiry-title"><button className="inquiry-close" onClick={() => setInquiry((v) => ({ ...v, open: false }))} aria-label="Close inquiry"><X/></button><span className="panel-label">{inquiry.context} / TRUEPEAK</span><h2 id="inquiry-title">{inquiry.service ? `Let's talk ${inquiry.service.toLowerCase()}.` : inquiry.context === 'Project inquiry' ? 'What should we build?' : 'What needs to move?'}</h2><InquiryForm key={`${inquiry.context}-${inquiry.service}`} onSubmit={submitContact} status={formStatus} context={inquiry.context} selectedService={inquiry.service}/></motion.section></motion.div>}</AnimatePresence>
+    <AnimatePresence>{inquiry.open && <motion.div className="inquiry-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={(event) => event.target === event.currentTarget && setInquiry((v) => ({ ...v, open: false }))}><motion.section className="inquiry-panel" initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ duration: .6, ease: [0.76, 0, 0.24, 1] }} role="dialog" aria-modal="true" aria-labelledby="inquiry-title"><button className="inquiry-close" onClick={() => setInquiry((v) => ({ ...v, open: false }))} aria-label="Close inquiry"><X/></button><span className="panel-label">{inquiry.context} / TRUEPEAK US</span><h2 id="inquiry-title">{inquiry.service ? `Let's talk ${inquiry.service.toLowerCase()}.` : inquiry.context === 'Project inquiry' ? 'What should we build?' : 'What needs to move?'}</h2><InquiryForm key={`${inquiry.context}-${inquiry.service}`} onSubmit={submitContact} status={formStatus} context={inquiry.context} selectedService={inquiry.service}/></motion.section></motion.div>}</AnimatePresence>
   </>
 }
 
