@@ -10,10 +10,10 @@ const capabilities = [
 ]
 
 const work = [
-  { title: 'Sean Lyder', domain: 'seanlyder.com', label: 'Personal platform', href: 'https://seanlyder.com' },
+  { title: 'Photography', domain: 'seanlyder.com', label: 'Personal photography', href: 'https://seanlyder.com' },
   { title: "Sophia's Lattes", domain: 'sophiaslattes.com', label: 'Independent hospitality', href: 'https://sophiaslattes.com' },
-  { title: 'TruePeak', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us' },
-  { title: 'Showcase', domain: 'showcase.seanlyder.com', label: 'Experiments and output', href: 'https://showcase.seanlyder.com' },
+  { title: 'TruePeak (This)', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us' },
+  { title: 'Old Scripts Showcase', domain: 'showcase.seanlyder.com', label: 'Experiments and output', href: 'https://showcase.seanlyder.com' },
   { title: 'GitHub', domain: 'github.com/slyder219', label: 'Working code', href: 'https://github.com/slyder219' },
 ]
 
