@@ -10,12 +10,14 @@ const capabilities = [
 ]
 
 const work = [
-  { title: 'Photography', domain: 'seanlyder.com', label: 'Personal photography', href: 'https://seanlyder.com' },
-  { title: "Sophia's Lattes", domain: 'sophiaslattes.com', label: 'Independent hospitality', href: 'https://sophiaslattes.com' },
-  { title: 'TruePeak US (This)', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us' },
-  { title: 'Old Scripts Showcase', domain: 'showcase.seanlyder.com', label: 'Experiments and output', href: 'https://showcase.seanlyder.com' },
-  { title: 'Telonote', domain: 'telonote.com', label: 'AI audio note taker with user-context transcription accuracy', href: 'https://telonote.com' },
-  { title: 'GitHub', domain: 'github.com/slyder219', label: 'Working code', href: 'https://github.com/slyder219' },
+  { title: 'Photography', domain: 'seanlyder.com', label: 'Personal photography', href: 'https://seanlyder.com', preview: '/assets/projects/seanlyder.com.webp' },
+  { title: "Sophia's Lattes", domain: 'sophiaslattes.com', label: 'Independent hospitality', href: 'https://sophiaslattes.com', preview: '/assets/projects/sophiaslattes.com.webp' },
+  { title: 'TruePeak US (This)', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us', preview: '/assets/projects/truepeak.us.webp' },
+  { title: 'Old Scripts Showcase', domain: 'showcase.seanlyder.com', label: 'Experiments and output', href: 'https://showcase.seanlyder.com', preview: '/assets/projects/showcase.seanlyder.com.webp' },
+  { title: '72 Degrees East, Inc.', domain: '72degreeseast.com', label: 'Company website', href: 'https://72degreeseast.com', preview: '/assets/projects/72degreeseast.com.webp' },
+  { title: 'A Leading Concept LLC', domain: 'aleadingconcept.com', label: 'Company website', href: 'https://aleadingconcept.com', preview: '/assets/projects/aleadingconcept.com.webp' },
+  { title: 'Telonote', domain: 'telonote.com', label: 'AI audio note taker with user-context transcription accuracy', href: 'https://telonote.com', preview: '/assets/projects/telonote.com.webp' },
+  { title: 'GitHub', domain: 'github.com/slyder219', label: 'Working code', href: 'https://github.com/slyder219', preview: '/assets/projects/github.webp' },
 ]
 
 const process = [
@@ -164,7 +166,16 @@ function App() {
 
       <section className="work" id="work">
         <header><span>03 / LINKS AND WORK</span><h2>Things<br/>in motion.</h2><p>A modest index of active sites, experiments, and working output.</p></header>
-        <div className="work-index">{work.map((item, index) => <a href={item.href} target="_blank" rel="noreferrer" key={item.href}><span className="work-num">0{index + 1}</span><strong>{item.title}</strong><small>{item.label}</small><em>{item.domain}</em><MoveUpRight/></a>)}</div>
+        <div className="work-index">{work.map((item, index) => <a className="work-card" href={item.href} target="_blank" rel="noreferrer" key={item.href}>
+          <span className="work-num">0{index + 1}</span>
+          <div className="work-title-wrap">
+            {item.preview && <span className="work-thumb"><img src={item.preview} alt={`${item.title} preview`} loading="lazy" /></span>}
+            <strong>{item.title}</strong>
+          </div>
+          <small>{item.label}</small>
+          <em>{item.domain}</em>
+          <MoveUpRight/>
+        </a>)}</div>
       </section>
 
       <section className="range" aria-label="TruePeak US capabilities"><div className="range-line"><span>OPERATIONS</span><i>→</i><span>SYSTEMS</span><i>→</i><span>SOURCING</span><i>→</i><span>LOGISTICS</span><i>→</i><span>SOFTWARE</span></div></section>
