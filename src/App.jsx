@@ -14,6 +14,7 @@ const work = [
   { title: "Sophia's Lattes", domain: 'sophiaslattes.com', label: 'Independent hospitality', href: 'https://sophiaslattes.com' },
   { title: 'TruePeak US (This)', domain: 'truepeak.us', label: 'Company system', href: 'https://truepeak.us' },
   { title: 'Old Scripts Showcase', domain: 'showcase.seanlyder.com', label: 'Experiments and output', href: 'https://showcase.seanlyder.com' },
+  { title: 'Telonote', domain: 'telonote.com', label: 'AI audio note taker with user-context transcription accuracy', href: 'https://telonote.com' },
   { title: 'GitHub', domain: 'github.com/slyder219', label: 'Working code', href: 'https://github.com/slyder219' },
 ]
 
