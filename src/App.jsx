@@ -82,6 +82,15 @@ function App() {
   }, [reducedMotion])
 
   useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (!hash) return
+    const scrollToHash = () => document.getElementById(hash)?.scrollIntoView({ behavior: 'auto', block: 'start' })
+    scrollToHash()
+    const timer = window.setTimeout(scrollToHash, reducedMotion ? 60 : 1200)
+    return () => window.clearTimeout(timer)
+  }, [reducedMotion])
+
+  useEffect(() => {
     const locked = inquiry.open || menuOpen
     document.body.classList.toggle('locked', locked)
     const onKey = (event) => event.key === 'Escape' && (setInquiry((v) => ({ ...v, open: false })), setMenuOpen(false))
